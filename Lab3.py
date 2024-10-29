@@ -3,43 +3,41 @@ print("Lab 3 - Software Unit Testing with PyTest")
 SORT_ASCENDING = 0
 SORT_DESCENDING = 1
 
-
 def bubble_sort(arr, sorting_order):
-    
-    # Copy input list to results list
-    arr_result = arr.copy()
+    # Check for non-integer values
+    if any(not isinstance(i, int) for i in arr):
+        return 2  
 
-    # Get number of elements in the list
+    # Check if array is empty
+    if len(arr) == 0:
+        return 0  
+
+    # Check if array has 10 or more numbers
+    if len(arr) >= 10:
+        return 1  
+
+    arr_result = arr.copy()
     n = len(arr_result)
 
-    if n < 10:
-        # Traverse through all array elements
+    # Sort array based on sorting order
+    if sorting_order == SORT_ASCENDING:
         for i in range(n - 1):
-            # range(n) also work but outer loop will
-            # repeat one time more than needed.
-
-            # Last i elements are already in place
             for j in range(0, n - i - 1):
-
-                if sorting_order == SORT_ASCENDING:
-                    if arr_result[j] > arr_result[j + 1]:
-                        arr_result[j], arr_result[j + 1] = arr_result[j + 1], arr_result[j]
-
-
-                elif sorting_order == SORT_DESCENDING:
-                    if arr_result[j] < arr_result[j + 1]:
-                        arr_result[j], arr_result[j + 1] = arr_result[j + 1], arr_result[j]
-
-                else:
-                    # Return an empty array
-                    arr_result = []
+                if arr_result[j] > arr_result[j + 1]:
+                    arr_result[j], arr_result[j + 1] = arr_result[j + 1], arr_result[j]
+    elif sorting_order == SORT_DESCENDING:
+        for i in range(n - 1):
+            for j in range(0, n - i - 1):
+                if arr_result[j] < arr_result[j + 1]:
+                    arr_result[j], arr_result[j + 1] = arr_result[j + 1], arr_result[j]
     else:
-        arr_result = -1
+        # Invalid sorting order, return an empty list
+        return []
 
     return arr_result
 
 def main():
-    # Driver code to test above
+    # Driver code to test the above
     arr = [64, 34, 25, 12, 22, 11, 90]
 
     # Sort in ascending order
@@ -54,5 +52,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
