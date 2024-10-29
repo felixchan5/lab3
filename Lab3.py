@@ -5,7 +5,7 @@ SORT_DESCENDING = 1
 
 
 def bubble_sort(arr, sorting_order):
-
+    
     # Copy input list to results list
     arr_result = arr.copy()
 
